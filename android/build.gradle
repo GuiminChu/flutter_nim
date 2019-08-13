@@ -1,0 +1,51 @@
+group 'cn.cgm.flutter_nim'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'http://developer.huawei.com/repo' }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    // 添加网易云信依赖。注意，版本号必须一致。
+    // 基础功能 (必需)
+    api 'com.netease.nimlib:basesdk:6.5.0'
+    // 聊天室需要
+    api 'com.netease.nimlib:chatroom:6.5.0'
+    // 全文检索服务需要
+    api 'com.netease.nimlib:lucene:6.5.0'
+    // 小米、华为、魅族、fcm 推送
+    api 'com.netease.nimlib:push:6.5.0'
+    // 华为
+    api 'com.huawei.android.hms:push:2.6.1.301'
+    api files('libs/MiPush_SDK_Client_3_6_19.jar')
+    api files('libs/vivopushsdk_v2.3.4.jar')
+}
