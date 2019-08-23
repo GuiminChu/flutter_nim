@@ -155,7 +155,15 @@ public class NIMRecentSessionsInteractor {
                 .setCallback(new RequestCallbackWrapper<List<RecentContact>>() {
                     @Override
                     public void onResult(int code, List<RecentContact> recents, Throwable e) {
+                        if (recentSessions == null) {
+                            recentSessions = new ArrayList<>();
+                        }
+
                         recentSessions = recents;
+
+                        if (recentSessions == null || recentSessions.isEmpty()) {
+                            return;
+                        }
 
                         if (recentSessionUserIds == null) {
                             recentSessionUserIds = new ArrayList<>();

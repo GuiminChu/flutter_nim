@@ -32,7 +32,6 @@ import 'package:flutter/services.dart';
 
 import 'models/nim_session_model.dart';
 import 'models/nim_message_model.dart';
-import 'models/nim_user_model.dart';
 
 export 'models/nim_session_model.dart';
 export 'models/nim_message_model.dart';
