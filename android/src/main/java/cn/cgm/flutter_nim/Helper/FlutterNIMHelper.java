@@ -128,7 +128,9 @@ public class FlutterNIMHelper {
         @Override
         public void onEvent(CustomNotification message) {
             // 在这里处理自定义通知。
-            imHelperNotificationCallback.onEvent(message);
+            if (imHelperNotificationCallback != null) {
+                imHelperNotificationCallback.onEvent(message);
+            }
         }
     };
 
