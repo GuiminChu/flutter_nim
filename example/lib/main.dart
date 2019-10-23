@@ -1,56 +1,27 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_nim/flutter_nim.dart';
+import 'package:flutter_nim_example/utils/user_utils.dart';
+import 'package:flutter_nim_example/ui/page_login.dart';
+import 'package:flutter_nim_example/ui/page_recent_sessions.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  final imAccount = await UserUtils.imAccount;
+  final imToken = await UserUtils.imToken;
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+  FlutterNIM().init(
+    appKey: "45c6af3c98409b18a84451215d0bdd6e",
+    apnsCername: "ENTERPRISE",
+    apnsCernameDevelop: "DEVELOPER",
+    imAccount: imAccount,
+    imToken: imToken,
+  );
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  bool isLogin = await UserUtils.isLogin();
 
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await FlutterNIM().platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
-      ),
-    );
+  if (isLogin) {
+    runApp(MyApp());
+  } else {
+    runApp(LoginHomePage());
   }
 }

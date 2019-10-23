@@ -1,3 +1,8 @@
+## 0.1.5
+
+* Fix bugs.
+* Add example.
+
 ## 0.1.4
 
 * Update nim sdk.

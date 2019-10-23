@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_nim'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'A new Flutter plugin for netease im.'
   s.description      = <<-DESC
 A new Flutter plugin for netease im.

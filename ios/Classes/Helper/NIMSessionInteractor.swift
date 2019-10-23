@@ -267,11 +267,14 @@ extension NIMSessionInteractor: NIMChatManagerDelegate {
     
     func onRecvMessages(_ messages: [NIMMessage]) {
         if let newMessage = messages.first {
-            allMessages.append(newMessage)
-            refreshDataSource()
             
-            // 收到新消息时，标记已读
-            markRead()
+            if newMessage.session?.sessionId == self.session.sessionId {
+                allMessages.append(newMessage)
+                refreshDataSource()
+                
+                // 收到新消息时，标记已读
+                markRead()
+            }
         }
     }
 }
