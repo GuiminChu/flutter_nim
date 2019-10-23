@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (isLoginSuccess) {
       UserUtils.saveIMLoginInfo(imAccount, imToken);
-      ZKRouter.pushWidget(context, MyApp());
+      ZKRouter.pushWidget(context, MyApp(), replaceCurrent: true);
     } else {
       ZKCommonUtils.showToast("登录失败，请检查您的账号密码");
     }

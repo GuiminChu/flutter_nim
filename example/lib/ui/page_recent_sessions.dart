@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nim/flutter_nim.dart';
 
 import 'package:flutter_nim_example/provider/provider.dart';
+import 'package:flutter_nim_example/ui/page_login.dart';
+import 'package:flutter_nim_example/utils/user_utils.dart';
 import 'package:flutter_nim_example/zeus_kit/zeus_kit.dart';
 import 'package:flutter_nim_example/ui/page_chat.dart';
 
@@ -40,10 +42,39 @@ class _RecentSessionsPageState extends State<RecentSessionsPage> {
           title: const Text("消息"),
           centerTitle: true,
           elevation: 0.5,
+          actions: _buildAppBarActions(),
         ),
         body: _buildBodyWidget(),
       ),
     );
+  }
+
+  List<Widget> _buildAppBarActions() {
+    return [
+      GestureDetector(
+        onTap: () {
+          FlutterNIM().logout();
+
+          UserUtils.clearLoginInfo();
+
+          ZKRouter.pushWidget(
+            context,
+            LoginHomePage(),
+            replaceCurrent: true,
+          );
+        },
+        child: Container(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+          alignment: Alignment.center,
+          child: Text(
+            "登出",
+            style: TextStyle(
+              fontSize: 15.0,
+            ),
+          ),
+        ),
+      )
+    ];
   }
 
   Widget _buildBodyWidget() {

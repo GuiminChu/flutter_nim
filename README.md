@@ -16,8 +16,15 @@
 * 发送接收自定义消息
 * 标记音频已读
 * 调用`NIMSDK`能力实现语音消息的录制、发送
+ 
       
+> ##### 不支持群组聊天      
       
+
+## Screenshot
+
+![Screenshot1](https://github.com/GuiminChu/flutter_nim/blob/develop/screenshot/Screen%20Shot%201.png)
+
 ## 部分示例
 
 ### 初始化

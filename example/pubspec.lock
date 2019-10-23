@@ -84,12 +84,12 @@ packages:
     source: hosted
     version: "2.0.4"
   flutter_nim:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.1.5"
+      name: flutter_nim
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.5+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter

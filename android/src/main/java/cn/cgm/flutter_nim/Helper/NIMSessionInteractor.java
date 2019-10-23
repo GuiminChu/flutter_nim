@@ -317,12 +317,14 @@ public class NIMSessionInteractor implements IAudioRecordCallback {
             return;
         }
 
-        allMessages.add(messages.get(0));
+        if (messages.get(0).getSessionId().equals(sessionId)) {
+            allMessages.add(messages.get(0));
 
-        refreshDataSource();
+            refreshDataSource();
 
-        // 发送已读回执
+            // 发送已读回执
 //        messageListPanel.sendReceipt();
+        }
     }
 
     public void loadHistoryMessages(int messageIndex) {
