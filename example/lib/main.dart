@@ -6,6 +6,8 @@ import 'package:flutter_nim_example/ui/page_login.dart';
 import 'package:flutter_nim_example/ui/page_recent_sessions.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final imAccount = await UserUtils.imAccount;
   final imToken = await UserUtils.imToken;
 

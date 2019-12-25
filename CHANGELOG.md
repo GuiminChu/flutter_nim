@@ -1,3 +1,8 @@
+## 0.1.6
+
+* Update nim sdk.
+* Require Flutter SDK 1.12.13+hotfix.4 or greater.
+
 ## 0.1.5+1
 
 * Add screenshot.

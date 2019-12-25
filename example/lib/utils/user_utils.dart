@@ -12,12 +12,12 @@ class UserUtils {
 
   static Future<String> get imAccount async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString(_imAccountKey);
+    return preferences.getString(_imAccountKey) ?? "";
   }
 
   static Future<String> get imToken async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString(_imTokenKey);
+    return preferences.getString(_imTokenKey) ?? "";
   }
 
   /// 是否登录

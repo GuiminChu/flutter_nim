@@ -40,7 +40,7 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ChatProvider>(
-      builder: (context) => ChatProvider(),
+      create: (context) => ChatProvider(),
       child: ChatScreen(
         sessionId: sessionId,
         chatName: chatName,

@@ -2,9 +2,9 @@ PODS:
   - audioplayers (0.0.1):
     - Flutter
   - Flutter (1.0.0)
-  - flutter_nim (0.1.4):
+  - flutter_nim (0.1.6):
     - Flutter
-    - NIMSDK (= 6.9.1)
+    - NIMSDK (= 7.0.3)
   - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.5):
@@ -15,13 +15,17 @@ PODS:
   - keyboard_visibility (0.5.0):
     - Flutter
     - Reachability
-  - NIMSDK (6.9.1)
+  - NIMSDK (7.0.3)
   - path_provider (0.0.1):
     - Flutter
-  - permission_handler (3.3.0):
+  - permission_handler (4.0.0):
     - Flutter
   - Reachability (3.2)
   - shared_preferences (0.0.1):
+    - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
     - Flutter
   - sqflite (0.0.1):
     - Flutter
@@ -37,10 +41,12 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - FMDB
     - NIMSDK
     - Reachability
@@ -64,24 +70,30 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
   audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_nim: c892550b0f9f442bd9f1c6904112aa602da7c95e
+  flutter_nim: 3d47024dd899f85cc7de5b0d685794ed7ae6ac77
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
   keyboard_visibility: 96a24de806fe6823c3ad956c01ba2ec6d056616f
-  NIMSDK: 52ce92caa6d8f783eca25bf09e7901752abb7c25
+  NIMSDK: 76dfea3b739f837db806e6fc02113dab8ec97d4a
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
-  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
+  permission_handler: 0fb88b8a3c23e31e5de45b8f1bb8b7de28cf8941
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
 
-PODFILE CHECKSUM: 0ac88edef872191ec782accc4e054b485cc6264b
+PODFILE CHECKSUM: 33fc79ba6f4c14cbfc335357e1271d639f1c9cc4
 
 COCOAPODS: 1.8.3

@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_nim'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = 'A new Flutter plugin for netease im.'
   s.description      = <<-DESC
 A new Flutter plugin for netease im.
@@ -15,7 +15,7 @@ A new Flutter plugin for netease im.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'NIMSDK', '6.9.1'
+  s.dependency 'NIMSDK', '7.0.3'
 
   s.ios.deployment_target = '9.0'
 end

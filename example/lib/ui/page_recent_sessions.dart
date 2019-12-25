@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => NIMProvider()),
-        ChangeNotifierProvider(builder: (_) => ChatProvider()),
+        ChangeNotifierProvider(create: (_) => NIMProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: MaterialApp(
         home: RecentSessionsPage(),

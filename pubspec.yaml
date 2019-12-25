@@ -1,6 +1,6 @@
 name: flutter_nim
 description: A new Flutter plugin for netease im, can be used to receive and send messages.
-version: 0.1.5+1
+version: 0.1.6
 author: GuiminChu <damien.chu@foxmail.com>
 homepage: https://github.com/GuiminChu/flutter_nim
 
