@@ -7,6 +7,7 @@
 * 登录
 * 自动登录
 * 退出登录
+* 踢出
 * 获取最近会话列表
 * 删除一个最近会话列表
 * 开启新会话
@@ -93,6 +94,14 @@ bool isSuccess = await FlutterNIM().login(imAccount, imToken);
 
 ```dart
 FlutterNIM().logout();
+```
+
+### 踢出
+
+```dart
+FlutterNIM().kickReasonResponse.listen((NIMKickReason reason) {
+    // 处理被踢下线逻辑
+});
 ```
 
 ### 最近会话列表

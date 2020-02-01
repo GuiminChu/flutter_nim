@@ -32,10 +32,12 @@ import 'package:flutter/services.dart';
 
 import 'models/nim_session_model.dart';
 import 'models/nim_message_model.dart';
+import 'models/nim_kick_reason.dart';
 
 export 'models/nim_session_model.dart';
 export 'models/nim_message_model.dart';
 export 'models/nim_user_model.dart';
+export 'models/nim_kick_reason.dart';
 
 class FlutterNIM {
   factory FlutterNIM() {
@@ -64,12 +66,18 @@ class FlutterNIM {
   StreamController<List<NIMMessage>> _messagesController =
       StreamController.broadcast();
 
+  StreamController<NIMKickReason> _kickReasonController =
+      StreamController.broadcast();
+
   /// Response for recent sessions
   Stream<List<NIMRecentSession>> get recentSessionsResponse =>
       _recentSessionsController.stream;
 
   /// Response for chat messages
   Stream<List<NIMMessage>> get messagesResponse => _messagesController.stream;
+
+  /// Response for kick reason
+  Stream<NIMKickReason> get kickReasonResponse => _kickReasonController.stream;
 
   Future<String> get platformVersion async {
     final String version =
@@ -309,6 +317,21 @@ class FlutterNIM {
     }
   }
 
+  // 解析被踢下线 JSON
+  void _parseKickReasonData(dynamic imMap) {
+    final kickCode = imMap["kickCode"];
+
+    if (kickCode != null) {
+      if (kickCode == 1) {
+        _kickReasonController.add(NIMKickReason.byClient);
+      } else if (kickCode == 2) {
+        _kickReasonController.add(NIMKickReason.byServer);
+      } else if (kickCode == 3) {
+        _kickReasonController.add(NIMKickReason.byClientManually);
+      }
+    }
+  }
+
   void _onEvent(Object event) {
     if (event != null) {
       String eventString = event;
@@ -317,6 +340,7 @@ class FlutterNIM {
 
         _parseRecentSessionsData(imMap);
         _parseMessagesData(imMap);
+        _parseKickReasonData(imMap);
       } on FormatException catch (e) {
         print("FlutterNIM - That string didn't look like Json.");
         print(e.message);

@@ -46,6 +46,11 @@ class NIMProvider with ChangeNotifier {
 
       notifyListeners();
     });
+
+    FlutterNIM().kickReasonResponse.listen((NIMKickReason reason) {
+      // 处理被踢下线逻辑
+      print(reason);
+    });
   }
 
   @override

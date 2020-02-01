@@ -4,6 +4,7 @@ import android.app.Application;
 
 import cn.cgm.flutter_nim.Helper.FlutterNIMHelper;
 import cn.cgm.flutter_nim.Helper.FlutterNIMPreferences;
+import cn.cgm.flutter_nim.Helper.NIMKickoutInteractor;
 import cn.cgm.flutter_nim.Helper.NIMRecentSessionsInteractor;
 import cn.cgm.flutter_nim.Helper.NIMSessionInteractor;
 import io.flutter.plugin.common.EventChannel;
@@ -52,6 +53,7 @@ public class FlutterNimPlugin implements MethodCallHandler, EventChannel.StreamH
 
     private NIMSessionInteractor sessionInteractor;
 
+    private NIMKickoutInteractor kickoutInteractor;
 
     /**
      * Plugin registration.
@@ -80,6 +82,7 @@ public class FlutterNimPlugin implements MethodCallHandler, EventChannel.StreamH
     public void onListen(Object o, EventChannel.EventSink eventSink) {
         this.eventSink = eventSink;
         recentSessionsInteractor = new NIMRecentSessionsInteractor(eventSink);
+        kickoutInteractor = new NIMKickoutInteractor(eventSink);
     }
 
     @Override

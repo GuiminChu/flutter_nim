@@ -1,3 +1,7 @@
+## 0.1.7
+
+* Add kick out callback.
+
 ## 0.1.6
 
 * Update nim sdk.

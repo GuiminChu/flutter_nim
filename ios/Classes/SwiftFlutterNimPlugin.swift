@@ -148,7 +148,7 @@ public class SwiftFlutterNIMPlugin: NSObject, FlutterPlugin {
         // 注册自定义消息解析器
         NIMCustomObject.registerCustomDecoder(IMCustomMessageAttachmentDecoder())
  
-//        NIMSDK.shared().loginManager.add(self)
+        NIMSDK.shared().loginManager.add(self)
 //        NIMSDK.shared().systemNotificationManager.add(self)
         NIMSDK.shared().conversationManager.add(self)
         
@@ -433,6 +433,48 @@ extension SwiftFlutterNIMPlugin: NIMConversationManagerDelegate {
         }
 
         sendRecentSessionsEvent()
+    }
+}
+
+// MARK: - NIMLoginManagerDelegate 登录相关回调
+
+extension SwiftFlutterNIMPlugin: NIMLoginManagerDelegate {
+    // 自动登录失败回调
+    public func onAutoLoginFailed(_ error: Error) {
+        
+    }
+    
+    public func onKick(_ code: NIMKickReason, clientType: NIMLoginClientType) {
+        switch code {
+        case .byClient:
+            // 被踢下线
+            print("FlutterNIM：被踢下线")
+            kick(code: 1)
+        case .byServer:
+            // 被服务器踢下线
+            print("FlutterNIM：被服务器踢下线")
+            kick(code: 2)
+        case .byClientManually:
+            // 被手动踢下线(指的是被登录的其他端手动踢掉)
+            print("FlutterNIM：被手动踢下线")
+            kick(code: 3)
+        }
+    }
+    
+    private func kick(code: Int) {
+        guard let eventSink = self.eventSink else {
+            return
+        }
+        
+        var result = ""
+        let dict: [String: Any] = ["kickCode": code]
+        
+        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted),
+            let jsonString = String(data: data, encoding: String.Encoding.utf8) {
+            result = jsonString
+        }
+        
+        eventSink(result)
     }
 }
 
