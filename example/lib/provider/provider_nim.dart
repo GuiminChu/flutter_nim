@@ -30,7 +30,7 @@ class NIMProvider with ChangeNotifier {
       this._recentSessions = recentSessions;
 
       this._badgeNumber = recentSessions
-          .map((s) => s.unreadCount)
+          .map((s) => s.unreadCount!)
           .fold(0, (curr, next) => curr + next);
 
       notifyListeners();

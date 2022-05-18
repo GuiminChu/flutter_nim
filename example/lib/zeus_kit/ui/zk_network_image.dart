@@ -4,15 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class ZKNetworkImage extends StatelessWidget {
   final String imageUrl;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
   final String placeholderImagePath;
   final String errorImagePath;
 
   ZKNetworkImage({
-    @required this.imageUrl,
+    required this.imageUrl,
     this.width,
     this.height,
     this.fit: BoxFit.cover,
@@ -23,7 +23,7 @@ class ZKNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (imageUrl == null || imageUrl.isEmpty) {
+    if (imageUrl.isEmpty) {
       return ClipRRect(
         borderRadius: borderRadius,
         child: placeholderImagePath.isEmpty
@@ -90,15 +90,15 @@ class ZKCircleAvatar extends StatelessWidget {
   final String defaultAvatar;
 
   ZKCircleAvatar({
-    Key key,
-    @required this.avatarUrl,
-    @required this.size,
-    @required this.defaultAvatar,
+    Key? key,
+    required this.avatarUrl,
+    required this.size,
+    required this.defaultAvatar,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (avatarUrl == null || avatarUrl.isEmpty) {
+    if (avatarUrl.isEmpty) {
       return ClipOval(
         child: Image.asset(
           defaultAvatar,

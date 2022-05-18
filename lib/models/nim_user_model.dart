@@ -1,7 +1,7 @@
 class NIMUser {
-  String nickname;
-  String avatarUrl;
-  String userExt;
+  String? nickname;
+  String? avatarUrl;
+  String? userExt;
 
   NIMUser({
     this.nickname,

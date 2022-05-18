@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class ZKRouter {
-  static Future<T> pushWidget<T>(
+  static Future<T?> pushWidget<T>(
     BuildContext context,
     Widget widget, {
     bool replaceRoot = false,
@@ -16,7 +16,7 @@ class ZKRouter {
     );
   }
 
-  static Future<T> pushRoute<T>(
+  static Future<T?> pushRoute<T>(
     BuildContext context,
     PageRoute<T> route, {
     bool replaceRoot = false,

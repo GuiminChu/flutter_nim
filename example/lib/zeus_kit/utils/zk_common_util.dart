@@ -30,7 +30,7 @@ class ZKCommonUtils {
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
-      timeInSecForIos: 1,
+      timeInSecForIosWeb: 1,
     );
   }
 

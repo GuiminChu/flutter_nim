@@ -112,8 +112,8 @@ class _IMRecentSessionListItem extends StatelessWidget {
   final NIMRecentSession recentSession;
 
   _IMRecentSessionListItem({
-    Key key,
-    @required this.recentSession,
+    Key? key,
+    required this.recentSession,
   }) : super(key: key);
 
   @override
@@ -121,12 +121,12 @@ class _IMRecentSessionListItem extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         bool isSuccess =
-            await FlutterNIM().startChat(recentSession.sessionId.toLowerCase());
+            await FlutterNIM().startChat(recentSession.sessionId!.toLowerCase());
         if (isSuccess) {
           ZKRouter.pushWidget(
             context,
             Chat(
-              sessionId: recentSession.sessionId,
+              sessionId: recentSession.sessionId!,
               chatName: recentSession.userInfo?.nickname ?? "",
             ),
           );
@@ -171,7 +171,7 @@ class _IMRecentSessionListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          ZKDateUtil.timestampToYMDHM(recentSession.timestamp),
+                          ZKDateUtil.timestampToYMDHM(recentSession.timestamp!),
                           style: TextStyle(
                             color: ZKColors.text_gray,
                             fontSize: 14.0,
@@ -185,7 +185,7 @@ class _IMRecentSessionListItem extends StatelessWidget {
                         // 最后消息文本
                         Expanded(
                           child: Text(
-                            recentSession.messageContent,
+                            recentSession.messageContent!,
                             style: TextStyle(
                               color: ZKColors.text_gray,
                               fontSize: 13.0,

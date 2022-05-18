@@ -48,7 +48,7 @@ class ChatProvider with ChangeNotifier {
   // 是否上滑取消发送录音
   bool _willCancelRecording = false;
 
-  get willCancelRecording => _willCancelRecording;
+  bool get willCancelRecording => _willCancelRecording;
 
   set willCancelRecording(bool value) {
     _willCancelRecording = value;

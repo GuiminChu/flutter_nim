@@ -1,29 +1,29 @@
 class NIMMessage {
   /// 消息来源
-  String from;
+  String? from;
 
   /// 消息ID,唯一标识
-  String messageId;
+  String? messageId;
 
   /// 消息发送时间戳，单位 ms
-  int timestamp;
+  int? timestamp;
 
   /// 消息文本
   /// 消息中除 NIMMessageTypeText 和 NIMMessageTypeTip 外，其他消息 text 字段都为 nil
-  String text;
+  String? text;
 
   /// 是否是往外发的消息
   /// 由于能对自己发消息，所以并不是所有来源是自己的消息都是往外发的消息，这个字段用于判断头像排版位置（是左还是右）。
-  bool isOutgoingMsg;
+  bool? isOutgoingMsg;
 
   /// 是否显示时间戳
-  bool isShowTimeTag = false;
+  bool? isShowTimeTag = false;
 
-  NIMMessageType messageType;
-  NIMMessageObject messageObject;
-  NIMMessageDeliveryState deliveryState;
+  NIMMessageType? messageType;
+  NIMMessageObject? messageObject;
+  NIMMessageDeliveryState? deliveryState;
 
-  String customMessageContent;
+  String? customMessageContent;
   dynamic customMessageObject;
 
   NIMMessage({
@@ -107,23 +107,22 @@ class NIMMessage {
 }
 
 class NIMMessageObject {
-  String url; // 图片、音频、视频的远程路径
-  String thumbUrl; // 图片缩略图远程路径
-  String thumbPath; // 图片缩略图本地路径
-  String coverUrl; // 视频封面图远程路径
-  String path; // 音视频图片等文件本地路径
-  int duration; // 音频、视频的时长(毫秒)
+  String? url;      // 图片、音频、视频的远程路径
+  String? thumbUrl; // 图片缩略图远程路径
+  String? thumbPath;// 图片缩略图本地路径
+  String? coverUrl; // 视频封面图远程路径
+  String? path;     // 音视频图片等文件本地路径
+  int duration = 0; // 音频、视频的时长(毫秒)
 
-  bool isPlayed; // 音频消息是否播放过
+  bool isPlayed = true; // 音频消息是否播放过
 
   // 图片或视频的宽高
-  int width;
-  int height;
+  int width = 0;
+  int height = 0;
 
   // 音频时长描述
   String get audioDurationDesc {
     int seconds = (duration / 1000).ceil();
-
     return "$seconds\"";
   }
 
@@ -148,7 +147,7 @@ class NIMMessageObject {
     this.coverUrl,
     this.path,
     this.duration: 0,
-    this.isPlayed,
+    this.isPlayed: true,
     this.width: 0,
     this.height: 0,
   });

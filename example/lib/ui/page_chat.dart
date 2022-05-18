@@ -9,7 +9,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import 'package:flutter_nim_example/provider/provider.dart';
 import 'package:flutter_nim_example/zeus_kit/zeus_kit.dart';
@@ -29,11 +29,11 @@ const rightBubbleGradient = LinearGradient(
 
 class Chat extends StatelessWidget {
   final String sessionId;
-  final String chatName;
+  final String? chatName;
 
   Chat({
-    Key key,
-    @required this.sessionId,
+    Key? key,
+    required this.sessionId,
     this.chatName,
   }) : super(key: key);
 
@@ -41,21 +41,24 @@ class Chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ChatProvider>(
       create: (context) => ChatProvider(),
-      child: ChatScreen(
-        sessionId: sessionId,
-        chatName: chatName,
-      ),
+      child: Consumer2<NIMProvider, ChatProvider>(
+          builder: (context, nimProvider, chatProvider, _) {
+        return ChatScreen(
+          sessionId: sessionId,
+          chatName: chatName,
+        );
+      }),
     );
   }
 }
 
 class ChatScreen extends StatefulWidget {
   final String sessionId;
-  final String chatName;
+  final String? chatName;
 
   ChatScreen({
-    Key key,
-    @required this.sessionId,
+    Key? key,
+    required this.sessionId,
     this.chatName,
   }) : super(key: key);
 
@@ -64,13 +67,13 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  String sessionId;
+  String? sessionId;
 
   final ScrollController _listScrollController = ScrollController();
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
-  ChatProvider _chatProvider;
+  ChatProvider? _chatProvider;
   List<NIMMessage> messages = [];
   bool hasMoreData = false;
 
@@ -83,7 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
   FlutterNIM _nim = FlutterNIM();
 
   _ChatScreenState({
-    Key key,
+    Key? key,
     @required this.sessionId,
   });
 
@@ -97,23 +100,22 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _nim.loadMessages(-1);
 
-    KeyboardVisibilityNotification().addNewListener(
-      onChange: (bool visible) {
-        if (visible) {
-          _chatProvider.beginEditing();
-        } else {
-          _chatProvider.endEditing();
+    var keyboardVisibilityController = KeyboardVisibilityController();
+    keyboardVisibilityController.onChange.listen((bool visible) {
+      if (visible) {
+        _chatProvider.beginEditing();
+      } else {
+        _chatProvider.endEditing();
 
-          if (_chatProvider.isShowActionPanel) {
-            _chatProvider.showActionPanel();
-          }
-
-          if (_chatProvider.isShowAudioRecorder) {
-            _chatProvider.showAudioRecorder();
-          }
+        if (_chatProvider.isShowActionPanel) {
+          _chatProvider.showActionPanel();
         }
-      },
-    );
+
+        if (_chatProvider.isShowAudioRecorder) {
+          _chatProvider.showAudioRecorder();
+        }
+      }
+    });
   }
 
   // 有冲突，不用
@@ -194,12 +196,10 @@ class _ChatScreenState extends State<ChatScreen> {
               _buildInputBar(),
 
               // Sticker
-              if (_chatProvider.isShowStickerPanel)
-                _buildStickerPanel(),
+              if (_chatProvider.isShowStickerPanel) _buildStickerPanel(),
 
               // Action panel
-              if (_chatProvider.isShowActionPanel)
-                _buildActionPanel(),
+              if (_chatProvider.isShowActionPanel) _buildActionPanel(),
             ],
           ),
           // 正在录音

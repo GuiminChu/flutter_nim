@@ -40,6 +40,8 @@ export 'models/nim_user_model.dart';
 export 'models/nim_kick_reason.dart';
 
 class FlutterNIM {
+  static FlutterNIM? _instance;
+
   factory FlutterNIM() {
     if (_instance == null) {
       final MethodChannel methodChannel =
@@ -48,14 +50,12 @@ class FlutterNIM {
 
       _instance = FlutterNIM._private(methodChannel, eventChannel);
     }
-    return _instance;
+    return _instance!;
   }
 
   FlutterNIM._private(this._methodChannel, this._eventChannel) {
     _eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
   }
-
-  static FlutterNIM _instance;
 
   final MethodChannel _methodChannel;
   final EventChannel _eventChannel;
@@ -154,7 +154,6 @@ class FlutterNIM {
 
     final bool isSuccess =
         await _methodChannel.invokeMethod("imStartChat", map);
-
     return isSuccess;
   }
 
@@ -211,7 +210,8 @@ class FlutterNIM {
   }
 
   /// 会话内发送自定义消息
-  Future<void> sendCustomMessage(Map customObject, {String apnsContent}) async {
+  Future<void> sendCustomMessage(Map customObject,
+      {String? apnsContent}) async {
     final String customEncodeString = json.encode(customObject);
 
     Map<String, String> map = {
@@ -224,7 +224,7 @@ class FlutterNIM {
 
   /// 会话外发送自定义消息
   Future<bool> sendCustomMessageToSession(String sessionId, Map customObject,
-      {String apnsContent}) async {
+      {String? apnsContent}) async {
     final String customEncodeString = json.encode(customObject);
 
     Map<String, String> map = {
@@ -297,23 +297,21 @@ class FlutterNIM {
           .map<NIMMessage>((itemJson) => NIMMessage.fromJson(itemJson))
           .toList();
 
-      if (messages != null) {
-        if (messages.isNotEmpty) {
-          List.generate(messages.length, (index) {
-            if (index == 0) {
+      if (messages.isNotEmpty) {
+        List.generate(messages.length, (index) {
+          if (index == 0) {
+            messages[index].isShowTimeTag = true;
+          } else {
+            // 两条消息相隔 300 秒则显示时间戳
+            if (messages[index].timestamp! - messages[index - 1].timestamp! >
+                300000) {
               messages[index].isShowTimeTag = true;
-            } else {
-              // 两条消息相隔 300 秒则显示时间戳
-              if (messages[index].timestamp - messages[index - 1].timestamp >
-                  300000) {
-                messages[index].isShowTimeTag = true;
-              }
             }
-          });
-        }
-
-        _messagesController.add(messages);
+          }
+        });
       }
+
+      _messagesController.add(messages);
     }
   }
 
@@ -332,9 +330,10 @@ class FlutterNIM {
     }
   }
 
-  void _onEvent(Object event) {
-    if (event != null) {
+  void _onEvent(Object? event) {
+    if (event != null && event is String) {
       String eventString = event;
+
       try {
         final imMap = json.decode(eventString);
 
